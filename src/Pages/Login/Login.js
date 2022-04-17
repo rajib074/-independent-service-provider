@@ -31,6 +31,10 @@ const Login = () => {
           LOGIN
         </button>
       </Form>
+
+      <button className="btn-google" type="submit">
+          google
+        </button>
     </div>
   );
 };
