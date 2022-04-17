@@ -1,11 +1,22 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
-import "./Login.css";
+import "./Signup.css";
 
-const Login = () => {
+const Signup = () => {
   return (
     <div>
-      <Form className="login-form">
+      <Form className="signup-form">
+        <label for="exampleInputEmail1" className="form-label">
+          Name
+        </label>
+        <input
+          type="email"
+          className="form-control"
+          id=""
+          placeholder="Enter your name"
+          required=""
+        ></input>
+
         <label for="exampleInputEmail1" className="form-label">
           Email address
         </label>
@@ -28,11 +39,11 @@ const Login = () => {
           required=""
         ></input>
         <button className="btn-control" type="submit">
-          LOGIN
+          SIGNUP
         </button>
       </Form>
     </div>
   );
 };
 
-export default Login;
+export default Signup;
