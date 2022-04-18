@@ -1,20 +1,50 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
 import "./Login.css";
 
 const Login = () => {
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
+
+  const [signInWithEmailAndPassword, user, ] =
+    useSignInWithEmailAndPassword(auth);
+
+  if (user) {
+    navigate(from, { replace: true });
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    signInWithEmailAndPassword(email, password);
+  };
+
+  const navigateSignup = (event) => {
+    navigate("/signup");
+  };
+
   return (
     <div>
-      <Form className="login-form">
+      <Form onSubmit={handleSubmit} className="login-form">
         <label for="exampleInputEmail1" className="form-label">
           Email address
         </label>
         <input
           type="email"
           className="form-control"
-          id=""
+          ref={emailRef}
           placeholder="Enter your email"
-          required=""
+          required
         ></input>
 
         <label for="exampleInputEmail1" className="form-label">
@@ -23,18 +53,30 @@ const Login = () => {
         <input
           type="password"
           className="form-control"
-          id=""
+          ref={passwordRef}
           placeholder="Enter password"
-          required=""
+          required
         ></input>
         <button className="btn-control" type="submit">
           LOGIN
         </button>
       </Form>
+      <div className="login-google">
+        <p>
+          New to Genius Car?{" "}
+          <Link
+            to="/signup"
+            className="text-danger pe-auto text-decoration-none"
+            onClick={navigateSignup}
+          >
+            Please Signup
+          </Link>{" "}
+        </p>
 
-      <button className="btn-google" type="submit">
+        <button className="btn-google" type="submit">
           google
         </button>
+      </div>
     </div>
   );
 };

@@ -1,45 +1,44 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button, Form } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
 import "./Signup.css";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../../firebase.init";
-
-const provider = new GoogleAuthProvider();
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const Signup = () => {
-  const auth = getAuth();
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      // ...
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
-    });
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const navigate = useNavigate();
+
+  const navigateLogin = () => {
+    navigate("/login");
+  };
+
+  if (user) {
+    navigate("/home");
+  }
+
+  const handleSignup = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    createUserWithEmailAndPassword(email, password);
+  };
 
   return (
     <div>
-      <Form className="signup-form">
+      <Form onSubmit={handleSignup} className="signup-form">
         <label for="exampleInputEmail1" className="form-label">
           Name
         </label>
         <input
-          type="email"
+          type="text"
           className="form-control"
-          id=""
+          name="name"
           placeholder="Enter your name"
-          required=""
+          required
         ></input>
 
         <label for="exampleInputEmail1" className="form-label">
@@ -48,9 +47,9 @@ const Signup = () => {
         <input
           type="email"
           className="form-control"
-          id=""
+        name="email"
           placeholder="Enter your email"
-          required=""
+          required
         ></input>
 
         <label for="exampleInputEmail1" className="form-label">
@@ -59,18 +58,30 @@ const Signup = () => {
         <input
           type="password"
           className="form-control"
-          id=""
+         name="password"
           placeholder="Enter password"
-          required=""
+          required
         ></input>
         <button className="btn-control" type="submit">
           SIGNUP
         </button>
       </Form>
+      <div className="signup-google">
+        <p>
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="text-danger pe-auto text-decoration-none"
+            onClick={navigateLogin}
+          >
+            Please Login
+          </Link>{" "}
+        </p>
 
-      <button className="btn-google" type="submit">
-        Google
-      </button>
+        <button className="btn-google" type="submit">
+          Google
+        </button>
+      </div>
     </div>
   );
 };
