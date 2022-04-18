@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -47,7 +47,7 @@ const Signup = () => {
         <input
           type="email"
           className="form-control"
-        name="email"
+          name="email"
           placeholder="Enter your email"
           required
         ></input>
@@ -58,7 +58,7 @@ const Signup = () => {
         <input
           type="password"
           className="form-control"
-         name="password"
+          name="password"
           placeholder="Enter password"
           required
         ></input>
