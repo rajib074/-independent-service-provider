@@ -48,7 +48,7 @@ const Signup = () => {
   return (
     <div>
       <Form onSubmit={handleSignup} className="signup-form">
-        <label for="exampleInputEmail1" className="form-label">
+        <label htmlFor="exampleInputEmail1" className="form-label">
           Name
         </label>
         <input
@@ -59,7 +59,7 @@ const Signup = () => {
           required
         ></input>
 
-        <label for="exampleInputEmail1" className="form-label">
+        <label htmlFor="exampleInputEmail1" className="form-label">
           Email address
         </label>
         <input
@@ -70,7 +70,7 @@ const Signup = () => {
           required
         ></input>
 
-        <label for="exampleInputEmail1" className="form-label">
+        <label htmlFor="exampleInputEmail1" className="form-label">
           Password
         </label>
         <input

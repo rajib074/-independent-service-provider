@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import "./Checkout.css"
 
 const Checkout = () => {
   const [agree, setAgree] = useState(false);
@@ -116,7 +117,7 @@ const Checkout = () => {
                   disabled={!agree}
                   onClick={() => handelButtonClick()}
                   type='submit'
-                  className='btn btn-gr-red mt-4'>
+                  className='btn btn-control mt-4'>
                   Check Out
                 </button>
               </form>

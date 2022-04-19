@@ -16,6 +16,7 @@ function App() {
   return (
     <div>
       <Header></Header>
+    
 
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
@@ -23,14 +24,6 @@ function App() {
         <Route path="/services" element={<Services></Services>}></Route>
         <Route path="/blog" element={<Blog></Blog>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>.
-        <Route
-          path="/checkout/:checkoutId"
-          element={
-            <RequireAuth>
-              <Checkout />
-            </RequireAuth>
-          }
-        />
         <Route
           path="/checkout"
           element={

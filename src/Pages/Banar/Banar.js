@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Banar.css'
 
 const Banar = () => {
@@ -26,12 +27,14 @@ const Banar = () => {
               (International Business), Bachelors in Finance
             </p>
             <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-              <button
+              <Link
                 type="button"
                 className="btn btn-secondary"
+                to="/about"
               >
                 More
-              </button>
+              </Link>
+              l
             </div>
           </div>
         </div>

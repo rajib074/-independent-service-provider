@@ -1,10 +1,14 @@
 import React, { useRef } from "react";
-import { Button, Form } from "react-bootstrap";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-
+import { Form } from "react-bootstrap";
+import {
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import Google from "../Google/Google";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
 const Login = () => {
@@ -13,10 +17,11 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  let from = location.state?.from?.pathname || "/";
-
-  const [signInWithEmailAndPassword, user, ] =
+  const [signInWithEmailAndPassword, user] =
     useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+
+  const from = location.state?.from?.pathname || "/";
 
   if (user) {
     navigate(from, { replace: true });
@@ -33,10 +38,19 @@ const Login = () => {
   const navigateSignup = (event) => {
     navigate("/signup");
   };
+  const resetPassword = async () => {
+    const email = emailRef.current.value;
+    if (email) {
+      await sendPasswordResetEmail(email);
+      toast.success("Password reset email sent successfully");
+    } else {
+      toast.error("Please enter email");
+    }
+  };
 
   return (
-    <div>
-      <Form onSubmit={handleSubmit} className="login-form">
+    <div className="login-form">
+      <Form onSubmit={handleSubmit}>
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email address
         </label>
@@ -58,6 +72,11 @@ const Login = () => {
           placeholder="Enter password"
           required
         ></input>
+        <div className="mb-3 form-text">
+          <span className="btn-link pointer" onClick={resetPassword}>
+            Forget Password
+          </span>
+        </div>
         <button className="btn-control" type="submit">
           LOGIN
         </button>
@@ -75,6 +94,7 @@ const Login = () => {
         </p>
 
         <Google></Google>
+        <ToastContainer></ToastContainer>
       </div>
     </div>
   );
