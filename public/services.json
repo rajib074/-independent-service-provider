@@ -1,24 +1,18 @@
 [
     {
-         id: 1,
-         name: 'kala 1',
-         price: 100,
-         description: 'hhh bh hh h h h hhh  h',
-         img;'https://thumbs.dreamstime.com/b/indian-farmer-checking-his-watermelon-field-farmar-watermelon-field-indian-farmer-checking-his-watermelon-field-123558296.jpg' 
-     },
+      "id": "1",
+      "img": "https://owly.wpengine.com/wp-content/uploads/2019/02/student-1.jpg",
+      "name": "Wiley Nicholson"
+    },
     {
-         id: 1,
-         name: 'kala 1',
-         price: 100,
-         description: 'hhh bh hh h h h hhh  h',
-         img;'https://thumbs.dreamstime.com/b/indian-farmer-checking-his-watermelon-field-farmar-watermelon-field-indian-farmer-checking-his-watermelon-field-123558296.jpg' 
-     },
+      "id": "2",
+      "img": "https://owly.wpengine.com/wp-content/uploads/2019/02/student-1.jpg",
+      "name": "Cardenas Stout"
+    },
     {
-         id: 1,
-         name: 'kala 1',
-         price: 100,
-         description: 'hhh bh hh h h h hhh  h',
-         img;'https://thumbs.dreamstime.com/b/indian-farmer-checking-his-watermelon-field-farmar-watermelon-field-indian-farmer-checking-his-watermelon-field-123558296.jpg' 
-     },
-]
-    
+      "id": "3",
+      "img": "https://owly.wpengine.com/wp-content/uploads/2019/02/student-1.jpg",
+      "name": "Glover Knight"
+    }
+   
+  ]

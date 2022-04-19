@@ -1,30 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import "./Signup.css";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
+import { updateProfile } from "firebase/auth";
+import Loading from "../../Loading/Loading";
+import Google from "../Google/Google";
 
 const Signup = () => {
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+  const [agree, setAgree] = useState(false);
+  const [
+    createUserWithEmailAndPassword,
+     user,
+     loading,
+     error,
+      ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
+      const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+
   const navigate = useNavigate();
 
   const navigateLogin = () => {
     navigate("/login");
   };
 
-  if (user) {
-    navigate("/home");
-  }
+  if(loading || updating){
+        return <Loading></Loading>
+    }
 
-  const handleSignup = (event) => {
+    if (user) {
+     console.log('user', user);  
+    }
+
+  const handleSignup = async (event) => {
     event.preventDefault();
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
 
     createUserWithEmailAndPassword(email, password);
+    await updateProfile({ displayName: name });
+    console.log('Updated profile');
+    navigate('/home');
   };
 
   return (
@@ -62,7 +80,10 @@ const Signup = () => {
           placeholder="Enter password"
           required
         ></input>
-        <button className="btn-control" type="submit">
+        <input onClick={() => setAgree(!agree)} type="checkbox" name="terms" id="terms" />
+        <label className={`ps-2 ${agree ? '' : 'text-danger'}`} htmlFor="terms">Accept This Conditions</label>
+                
+        <button className="btn-control mx-auto btn btn-primary mt-" type="submit">
           SIGNUP
         </button>
       </Form>
@@ -78,9 +99,7 @@ const Signup = () => {
           </Link>{" "}
         </p>
 
-        <button className="btn-google" type="submit">
-          Google
-        </button>
+        <Google></Google>
       </div>
     </div>
   );

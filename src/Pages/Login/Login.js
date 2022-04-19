@@ -4,6 +4,7 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Google from "../Google/Google";
 import "./Login.css";
 
 const Login = () => {
@@ -36,7 +37,7 @@ const Login = () => {
   return (
     <div>
       <Form onSubmit={handleSubmit} className="login-form">
-        <label for="exampleInputEmail1" className="form-label">
+        <label htmlFor="exampleInputEmail1" className="form-label">
           Email address
         </label>
         <input
@@ -47,7 +48,7 @@ const Login = () => {
           required
         ></input>
 
-        <label for="exampleInputEmail1" className="form-label">
+        <label htmlFor="exampleInputEmail1" className="form-label">
           Password
         </label>
         <input
@@ -73,9 +74,7 @@ const Login = () => {
           </Link>{" "}
         </p>
 
-        <button className="btn-google" type="submit">
-          google
-        </button>
+        <Google></Google>
       </div>
     </div>
   );

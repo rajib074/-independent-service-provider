@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './Footer.css'
 
 const Footer = () => {
@@ -55,7 +56,13 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-copy-right">
-      <p><small>Copyright © 2022. </small> </p>
+      <p>
+                Copyright {" "}
+                <Link to='/' className='red'>
+                  GYMEE
+                </Link>{" "}
+                @{new Date().getFullYear()} All Rights Reserved
+              </p>
       </div>
 
 
