@@ -10,9 +10,9 @@ const About = () => {
           <div className="col-md-5">
             <div className="about-left-content">
               <div className="section-title-left">
-                <hr className="bg-red" />
+                
                 <h2>About Me</h2>
-                <h3>আমি রাজীব সরকার </h3>
+                <h3>আমি রাজীব সরকার  </h3>
                 <p>
                   ওয়েব ডেভলাপমেন্ট এর কাজে নতুন। এই কাজ টি ভালোভাবে শেখার অনেক
                   দিন এর ইচ্ছা,এই কাজটি দিযে আমি ভবিষৎ এ কিছু করতে চায় ,এবং আমি
